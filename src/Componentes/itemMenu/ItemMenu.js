@@ -6,23 +6,12 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
+//Router
 import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
-
-
-    toolbar: {
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        ...theme.mixins.toolbar,
-    },
     content: {
         padding: theme.spacing.unit * 10,
-    },
-
-    paper: {
-        height: 90,
-        width: 350,
     },
 
     iconoA:
@@ -31,12 +20,20 @@ const styles = theme => ({
         width: 50,
     },
 
+    paper: {
+        height: 90,
+        width: 350,
+    },
+
+    toolbar: {
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        ...theme.mixins.toolbar,
+    },
 });
 
 
 class ItemMenu extends Component {
-
-
     render() {
         const {
             classes,
@@ -45,7 +42,8 @@ class ItemMenu extends Component {
             primerTexto,
             ruta,
             textArea,
-            vista } = this.props;
+            vista
+        } = this.props;
 
         return (
             <Paper className={classes.paper}>

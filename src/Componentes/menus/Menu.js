@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ItemMenu from '../itemMenu/ItemMenu'
-import Titulo from '../bannerTitulos/titulo'
 
 // Iconos
 import Assignment from '@material-ui/icons/Assignment';
@@ -19,7 +18,6 @@ const styles = theme => ({
 
     content: {
         padding: theme.spacing.unit * 10,
-
     },
 
     paper: {
@@ -67,20 +65,17 @@ const styles = theme => ({
 });
 
 
-class Inicio extends Component {
-
+class Menu extends Component {
     render() {
         const { classes } = this.props;
 
         return (
 
             <div className={classes.root}>
-                <Titulo titulo="Menu Soporte"></Titulo>
                 <main className={classes.content}>
-
                     <Grid container spacing={24}>
                         <Grid item xs >
-                            <ItemMenu ruta="/ReglasImpuestos" primerTexto="Reglas Impuestos" vista={classes.configIconoRI} textArea="OFAS" icono={<Class className={classes.iconoSize} />} />
+                            <ItemMenu ruta="/reglasImpuestos" primerTexto="Reglas Impuestos" vista={classes.configIconoRI} textArea="OFAS" icono={<Class className={classes.iconoSize} />} />
                         </Grid>
 
                         <Grid item xs>
@@ -88,19 +83,18 @@ class Inicio extends Component {
                         </Grid>
 
                         <Grid item xs>
-                            <ItemMenu ruta="/Inicio" primerTexto="Otros" vista={classes.configIconoOT} textArea="ABR" icono={<Build className={classes.iconoSize} />} />
+                            <ItemMenu ruta="/Otros" primerTexto="Otros" vista={classes.configIconoOT} textArea="ABR" icono={<Build className={classes.iconoSize} />} />
                         </Grid>
                     </Grid>
-
                 </main>
             </div>
         );
     }
 }
 
-Inicio.propTypes = {
+Menu.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Inicio);
+export default withStyles(styles, { withTheme: true })(Menu);

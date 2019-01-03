@@ -1,20 +1,22 @@
-import React, {Component} from 'react'
-import { BrowserRouter as Router, Route} from 'react-router-dom';
-import Inicio from '../Componentes/menus/Menu'
-import reglasImpuestosItems from '../Componentes/vistas/reglasImpuestosItem'
-import AuditoriasComponentes from '../Componentes/vistas/auditoriasComponentes'
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Inicio from '../vistas/inicio/inicio'
+import reglasImpuestos from '../vistas/reglasImpuestos/reglasImpuestos'
+import AuditoriasComponentes from '../vistas/auditoriasComponentes/auditoriasComponentes'
+import Otros from '../vistas/otros'
 
 class RouterComponent extends Component {
-    render(){
-        return(
-              <Router>
-                  <React.Fragment>
-                      <Route path="/" exact strict component={Inicio}/>
-                      <Route path="/Inicio" exact strict component={Inicio}/>
-                      <Route path="/reglasImpuestosItems" exact strict component={reglasImpuestosItems}/>
-                      <Route path="/AuditoriasComponentes" exact strict component={AuditoriasComponentes}/>
-                  </React.Fragment>
-              </Router>
+    render() {
+        return (
+            <Router>
+                <React.Fragment>
+                    <Route path="/" exact strict component={Inicio} />
+                    <Route path="/Inicio" exact strict component={Inicio} />
+                    <Route path="/reglasImpuestos" exact strict component={reglasImpuestos} />
+                    <Route path="/AuditoriasComponentes" exact strict component={AuditoriasComponentes} />
+                    <Route path="/Otros" exact strict component={Otros} />
+                </React.Fragment>
+            </Router>
         )
     }
 }
