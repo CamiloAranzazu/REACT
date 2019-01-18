@@ -10,6 +10,11 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Titulo from '../../Componentes/bannerTitulos/titulo'
 import Alert from '../../Componentes/alert/alert'
+import Badge from '@material-ui/core/Badge';
+import Typography from '@material-ui/core/Typography';
+
+
+
 
 const styles = theme => ({
     button: {
@@ -37,6 +42,14 @@ const styles = theme => ({
     menu: {
         width: 200,
     },
+    margin: {
+        margin: theme.spacing.unit * 2,
+        marginRight: theme.spacing.unit,
+    },
+    padding: {
+        padding: `0 ${theme.spacing.unit * 2}px`,
+    },
+   
 });
 
 class ReglasImpuestosItem extends Component {
@@ -73,6 +86,9 @@ class reglasImpuestos extends Component {
 
         return (
             <Paper className={classes.root}>
+                <Badge color="secondary" badgeContent={itemsReglasImpuestos.length} className={classes.margin}>
+        <           Typography className={classes.padding}>Conceptos</Typography>
+                </Badge>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>

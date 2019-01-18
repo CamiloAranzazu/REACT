@@ -6,7 +6,7 @@ class Inicio extends Component{
     render(){
         return(
             <div>
-                <Titulo esActivarBotonInicio={false} titulo='Menu principal' />
+                <Titulo esActivarBotonInicio={false} titulo='Menu Soporte' />
                 <Menu />
             </div>
         );
