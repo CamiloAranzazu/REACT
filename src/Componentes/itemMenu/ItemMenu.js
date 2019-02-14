@@ -14,12 +14,6 @@ const styles = theme => ({
         padding: theme.spacing.unit * 10,
     },
 
-    iconoA:
-    {
-        height: 50,
-        width: 50,
-    },
-
     paper: {
         height: 90,
         width: 350,

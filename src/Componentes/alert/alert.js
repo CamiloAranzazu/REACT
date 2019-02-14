@@ -92,7 +92,7 @@ const styles2 = theme => ({
     },
 });
 
-class CustomizedSnackbars extends Component {
+class Alertas extends Component {
     state = {
         open: false,
     };
@@ -103,7 +103,7 @@ class CustomizedSnackbars extends Component {
         );
     }
 
-    handleClose = (event, reason) => {
+    handleClose = ( reason) => {
         if (reason === 'clickaway') {
             return;
         }
@@ -125,7 +125,7 @@ class CustomizedSnackbars extends Component {
                         horizontal: 'left',
                     }}
                     open={this.state.open}
-                    autoHideDuration={6000}
+                    autoHideDuration={10000}
                     onClose={this.handleClose}
                 >
                     <TiposAlert
@@ -139,13 +139,14 @@ class CustomizedSnackbars extends Component {
     }
 }
 
-CustomizedSnackbars.defaultProps = {
+Alertas.defaultProps = {
     open: false,
-    tipoAlert: 'success'
+    tipoAlert: 'success',
+    mensaje: 'Soporte'
 }
 
-CustomizedSnackbars.propTypes = {
+Alertas.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles2)(CustomizedSnackbars);
+export default withStyles(styles2)(Alertas);

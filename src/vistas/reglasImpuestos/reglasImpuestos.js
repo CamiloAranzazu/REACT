@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,47 +8,53 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Titulo from '../../Componentes/bannerTitulos/titulo'
-import Alert from '../../Componentes/alert/alert'
 import Badge from '@material-ui/core/Badge';
 import Typography from '@material-ui/core/Typography';
-
-
-
+import Alertas from '../../Componentes/alert/alert'
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
-    button: {
+    root: {
+        flexGrow: 1,
+    },
+
+    button: 
+    {
         margin: theme.spacing.unit,
         backgroundColor: "#52ab56",
         color: "#FAFAFA",
     },
 
-    container: {
+    container: 
+    {
         display: 'flex',
         flexWrap: 'wrap',
     },
 
-    content: {
+    content: 
+    {
         padding: theme.spacing.unit * 5,
     },
 
-    textField: {
+    textField: 
+    {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
     },
-    dense: {
+    dense: 
+    {
         marginTop: 16,
     },
-    menu: {
-        width: 200,
-    },
-    margin: {
+    margin: 
+    {
         margin: theme.spacing.unit * 2,
         marginRight: theme.spacing.unit,
     },
-    padding: {
+    padding: 
+    {
         padding: `0 ${theme.spacing.unit * 2}px`,
     },
-   
+
 });
 
 class ReglasImpuestosItem extends Component {
@@ -74,20 +79,24 @@ class reglasImpuestos extends Component {
     constructor() {
         super();
 
-        this.state = { itemsReglasImpuestos: [] };
+        this.state = { itemsReglasImpuestos: [],
+                        tipoAlert: 'warning',
+                        mensaje: '',
+                        open: false
+                    };
     }
 
     /**
-     * @description Funciónm de concurrencia del render cuando hace llamados al API. 
+     * @description Funciónm de concurrencia del render cuando hace llamados al API.
      */
     _renderCurrencies() {
         const { itemsReglasImpuestos } = this.state;
-        const { classes } = this.props;
+        const { classes} = this.props;
 
         return (
             <Paper className={classes.root}>
                 <Badge color="secondary" badgeContent={itemsReglasImpuestos.length} className={classes.margin}>
-        <           Typography className={classes.padding}>Conceptos</Typography>
+                    <Typography className={classes.padding} >Conceptos</Typography>
                 </Badge>
                 <Table className={classes.table}>
                     <TableHead>
@@ -117,50 +126,83 @@ class reglasImpuestos extends Component {
         )
     }
 
-    consultarReglasImpuestos = () => {
+    consultarReglasImpuestos =  () => {
         const nitBeneficiario = this.txtNitBeneficiario.value;
-        const NitCliente = this.txtNitCliente.value;
-
-        if(nitBeneficiario === ''){
-            //this.props.tipoAlert = 'warning';
-            //this.props.mensaje = 'Debe ingresar el valor del beneficiario.';
-            alert('Debe ingresar el nit del beneficiario.');
-            return;
-        }else if (!/^[0-9]+$/g.test(nitBeneficiario)) {
-            alert('El campo nit beneficiario debe ser numerico.');
-            return;
+        const nitCliente = this.txtNitCliente.value;
+        if(nitBeneficiario === '')
+        {
+            this.setState( {open: true,
+                            tipoAlert:'warning',
+                            mensaje: 'Debe ingresar el nit del beneficiario.',
+                            });
+        } 
+        
+        if (!/^[0-9]+$/g.test(nitBeneficiario) ) 
+        {
+            this.setState( {open: true,
+                            tipoAlert:'error',
+                            mensaje: 'El campo nit beneficiario debe ser numerico.',
+                            });
         }
 
-        if(NitCliente === ''){
-            //this.props.tipoAlert = 'warning';
-            //this.props.mensaje = 'Debe ingresar el valor del beneficiario.';
-            alert('Debe ingresar el nit del cliente.');
-            return;
-        }else if (!/^[0-9]+$/g.test(NitCliente)) {
-            alert('El campo nit cliente debe ser numerico.');
-            return;
+        if(nitCliente === '')
+        {
+            this.setState( {open: true,
+                            tipoAlert:'warning',
+                            mensaje: 'Debe ingresar el nit del cliente.',
+                            });
+        }
+        
+        if (!/^[0-9]+$/g.test(nitCliente) ) 
+        {
+            this.setState( {open: true,
+                            tipoAlert:'error',
+                            mensaje: 'El campo nit cliente debe ser numerico.',
+                            });
         }
 
-        fetch('http://localhost:56930/api/ConceptosCalculadosReglasImp?NitBeneficiario=' + nitBeneficiario + '&NitCliente=' + NitCliente + '')
+        fetch('http://localhost:56930/api/ConceptosCalculadosReglasImp?NitBeneficiario=' + nitBeneficiario + '&NitCliente=' + nitCliente + '')
             .then(res => res.json())
             .then(data => {
                 const itemsReglasImpuestos = data;
                 this.setState({ itemsReglasImpuestos });
+
+                if(itemsReglasImpuestos.length > 0){
+                    this.setState( {open: true,
+                                    tipoAlert:'success',
+                                    mensaje: 'Consulta Exitosa, '+itemsReglasImpuestos.length+' registros',
+                    });
+                }else
+                {
+                    this.setState( {open: true,
+                                    tipoAlert:'info',
+                                    mensaje: 'Es posible la configuración del Nit del beneficiario o del cliente este mal.',
+                    });
+                }
+
             });
+        
+        this.setState({ open: false });
     }
+    
 
     render() {
-        const { classes, tipoAlert, mensaje, open } = this.props;
+        const { tipoAlert,
+                mensaje ,
+                open } = this.state;
+        const { classes } = this.props;
 
         return (
-            <div>
-                <Alert tipoAlert={tipoAlert} mensaje={mensaje} open={open} />
-                <Titulo titulo="Reglas impuestos" />
+            <div id="pagReglasImpuestos">
+                {this.state.open === true ? <Alertas tipoAlert={tipoAlert} mensaje={mensaje} open={open} /> : null}
+                <Titulo titulo="Reglas impuestos"/>
                 <main className={classes.content}>
                     <form className={classes.container} onSubmit={this.handleSubmit}>
+                        
                         <TextField
                             className={classes.textField}
                             id="txtNitBeneficiario"
+                            name="Beneficiario"
                             label="Nit beneficiario"
                             margin="dense"
                             required={true}
@@ -170,6 +212,7 @@ class reglasImpuestos extends Component {
                         <TextField
                             className={classes.textField}
                             id="txtNitCliente"
+                            name="cliente"
                             label="Nit cliente"
                             margin="dense"
                             required={true}
@@ -178,14 +221,13 @@ class reglasImpuestos extends Component {
                         />
                         <Button
                             className={classes.button}
-                            onClick={this.consultarReglasImpuestos}
+                            onClick={this.consultarReglasImpuestos }
                             size="small"
-                            variant="contained"
                         >
                             Buscar
                         </Button>
                     </form>
-                    <br />
+                    <br /><br />
                     <div>
                         {this._renderCurrencies()}
                     </div>
