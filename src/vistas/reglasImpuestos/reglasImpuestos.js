@@ -127,39 +127,32 @@ class reglasImpuestos extends Component {
     }
 
     consultarReglasImpuestos =  () => {
-        const nitBeneficiario = this.txtNitBeneficiario.value;
-        const nitCliente = this.txtNitCliente.value;
+        let nitBeneficiario = this.txtNitBeneficiario.value;
+        let nitCliente = this.txtNitCliente.value;
+
         if(nitBeneficiario === '')
         {
-            this.setState( {open: true,
-                            tipoAlert:'warning',
-                            mensaje: 'Debe ingresar el nit del beneficiario.',
-                            });
-        } 
+            nitBeneficiario = 0;
+            nitCliente = 0;
+        }else if(!/^[0-9]+$/g.test(nitBeneficiario) ) 
+            {
+                nitBeneficiario = 0;
+                nitCliente = 1;
+            }
         
-        if (!/^[0-9]+$/g.test(nitBeneficiario) ) 
-        {
-            this.setState( {open: true,
-                            tipoAlert:'error',
-                            mensaje: 'El campo nit beneficiario debe ser numerico.',
-                            });
-        }
+        
 
         if(nitCliente === '')
         {
-            this.setState( {open: true,
-                            tipoAlert:'warning',
-                            mensaje: 'Debe ingresar el nit del cliente.',
-                            });
-        }
+            nitBeneficiario = 1;
+            nitCliente = 0;
+        }else if(!/^[0-9]+$/g.test(nitCliente) ) 
+            {
+                nitBeneficiario = 1;
+                nitCliente = 2;
+            }
         
-        if (!/^[0-9]+$/g.test(nitCliente) ) 
-        {
-            this.setState( {open: true,
-                            tipoAlert:'error',
-                            mensaje: 'El campo nit cliente debe ser numerico.',
-                            });
-        }
+
 
         fetch('http://localhost:56930/api/ConceptosCalculadosReglasImp?NitBeneficiario=' + nitBeneficiario + '&NitCliente=' + nitCliente + '')
             .then(res => res.json())
@@ -176,9 +169,38 @@ class reglasImpuestos extends Component {
                 {
                     this.setState( {open: true,
                                     tipoAlert:'info',
-                                    mensaje: 'Es posible la configuración del Nit del beneficiario o del cliente este mal.',
+                                    mensaje: 'Es posible que la configuración del Nit del beneficiario o del cliente este mal.',
                     });
                 }
+
+                
+                if(nitBeneficiario ===0 && nitCliente ===0)
+                {
+                    this.setState( {open: true,
+                                    tipoAlert:'warning',
+                                    mensaje: 'Debe ingresar el nit del beneficiario.',
+                    });
+                }
+                if(nitBeneficiario === 0 && nitCliente === 1){
+                    this.setState( {open: true,
+                                    tipoAlert:'error',
+                                    mensaje: 'El campo nit beneficiario debe ser numerico.',
+                    });
+                }
+                if(nitBeneficiario === 1 && nitCliente === 0){
+                    this.setState( {open: true,
+                                    tipoAlert:'warning',
+                                    mensaje: 'Debe ingresar el nit del cliente.',
+                    });
+                }
+                
+                if(nitBeneficiario ===1 && nitCliente === 2){
+                    this.setState( {open: true,
+                                    tipoAlert:'error',
+                                    mensaje: 'El campo nit cliente debe ser numerico.',
+                    }); 
+                }
+
 
             });
         
