@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Inicio from '../vistas/inicio/inicio'
 import reglasImpuestos from '../vistas/reglasImpuestos/reglasImpuestos'
 import AuditoriasComponentes from '../vistas/auditoriasComponentes/auditoriasComponentes'
-import DialogEliminar from '../Componentes/Dialogs/DialogEliminar'
+import CustomPaginationActionsTable from '../vistas/otros'
 
 class RouterComponent extends Component {
     render() {
@@ -14,7 +14,7 @@ class RouterComponent extends Component {
                     <Route path="/Inicio" exact strict component={Inicio} />
                     <Route path="/reglasImpuestos" exact strict component={reglasImpuestos} />
                     <Route path="/AuditoriasComponentes" exact strict component={AuditoriasComponentes} />
-                    <Route path="/Otros" exact strict component={DialogEliminar} />
+                    <Route path="/Otros" exact strict component={CustomPaginationActionsTable} />
                 </React.Fragment>
             </Router>
         )

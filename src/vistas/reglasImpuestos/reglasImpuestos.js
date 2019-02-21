@@ -151,8 +151,6 @@ class reglasImpuestos extends Component {
                 nitBeneficiario = 1;
                 nitCliente = 2;
             }
-        
-
 
         fetch('http://localhost:56930/api/ConceptosCalculadosReglasImp?NitBeneficiario=' + nitBeneficiario + '&NitCliente=' + nitCliente + '')
             .then(res => res.json())

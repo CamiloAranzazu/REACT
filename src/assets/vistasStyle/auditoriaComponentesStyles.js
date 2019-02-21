@@ -6,6 +6,18 @@ import {
 
 const styles = theme => ({
 
+
+
+    configIconoAC: {
+        height: 35,
+        width: 35,
+        left: 18,
+        // top: 10,
+        //bottom: 30,
+        color: "#52ab56",
+        
+    },
+
       colorIconoEditar: {
         color: blanco,
         backgroundColor: verde,
@@ -14,8 +26,7 @@ const styles = theme => ({
         borderRadius: 16 
       },
       colorIconoEliminar: {
-        color: blanco,
-        backgroundColor: rojo,
+        color: rojo,
         margin: theme.spacing.unit,
         height: 36,
         borderRadius: 16 

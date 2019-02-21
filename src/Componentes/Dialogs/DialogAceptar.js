@@ -7,16 +7,10 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
 
-    buttonCancelar: 
+    buttonAceptar: 
     {
         margin: theme.spacing.unit,
         backgroundColor: "#52ab56",
-        color: "#FAFAFA",
-    },
-    buttonEliminar: 
-    {
-        margin: theme.spacing.unit,
-        backgroundColor: "#FF0000",
         color: "#FAFAFA",
     },
 
@@ -24,24 +18,12 @@ const styles = theme => ({
     {
         marginTop: 10,
     },
-    
-    iconoSize:{
-        height: 90,
-        width: 90,
-        left: 18,
-        // top: 10,
-        bottom: 30,
-        backgroundColor: "#FFFFFF",
-        color: "#fd960e",
-    },
-    estiloLetras:{
-        width: 60,
-    },
+
 
 });
 
 
-class DialogEliminar extends React.Component {
+class DialogAceptar extends React.Component {
     state = {
         open: false,
     };
@@ -60,8 +42,7 @@ class DialogEliminar extends React.Component {
     render() {
         const { classes,
                 mensaje,
-                icono,
-                actionEliminar } = this.props;
+                icono   } = this.props;
         return (
             <div>
                 <Dialog 
@@ -74,20 +55,15 @@ class DialogEliminar extends React.Component {
                                 {icono}
                             </div>
                         </Grid>
-                        <Grid item xs={12} className={classes.estiloLetras}>
-                            <Typography  align="center"  variant="title" >
+                        <Grid item xs={12}>
+                            <Typography align="center"  variant="title">
                                {mensaje}
                             </Typography>
                         </Grid>
                             
-                        <Grid item xs={6} align="center">
-                            <Button className={classes.buttonCancelar} onClick={this.handleClose} color="primary">
-                                Cancelar
-                            </Button>
-                        </Grid>
-                        <Grid item xs={6} align="center">
-                            <Button className={classes.buttonEliminar} onClick={actionEliminar} color="primary">
-                                Eliminar
+                        <Grid item xs={12} align="center">
+                            <Button className={classes.buttonAceptar} onClick={this.handleClose} color="primary">
+                                Listo
                             </Button>
                         </Grid>
                     </Grid>
@@ -97,9 +73,9 @@ class DialogEliminar extends React.Component {
     }
 }
 
-DialogEliminar.defaultProps = {
+DialogAceptar.defaultProps = {
     open: false,
 }
 
 
-export default withStyles(styles)(DialogEliminar);
+export default withStyles(styles)(DialogAceptar);
