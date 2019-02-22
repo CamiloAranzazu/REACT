@@ -111,12 +111,8 @@ class AuditoriasComponentes extends Component {
                                     onChangePage={this.handleChangePage}
                                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                                     ActionsComponent={TablePaginationActions}
-                                    backIconButtonProps={{
-                                        'aria-label': 'Previous Page',
-                                      }}
-                                      nextIconButtonProps={{
-                                        'aria-label': 'Next Page',
-                                      }}
+                                    labelRowsPerPage="Filas por página:"
+                                    labelDisplayedRows=	{({ from, to, count }) => `${from}-${to} de ${count}`}
                                 />
                             </TableRow>
                         </TableFooter>
