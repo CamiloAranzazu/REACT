@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import Titulo from '../../Componentes/bannerTitulos/titulo'
+
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -16,15 +16,10 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Style from "../../assets/vistasStyle/auditoriaComponentesStyles";
 //iconos
 import Assignment from '@material-ui/icons/Assignment';
-
+//Componentes
+import Titulo from '../../Componentes/bannerTitulos/titulo'
 import AuditoriasComponentesItems from '../auditoriasComponentes/auditoriasComponentesItems'
 import TablePaginationActions from '../../Componentes/TablePaginationActions/tablePaginationActions'
-
-
-
-
-  
-
 
 class AuditoriasComponentes extends Component {
 
@@ -50,11 +45,7 @@ class AuditoriasComponentes extends Component {
         const { classes } = this.props;
         
         return (
-           <div style={{
-                        marginLeft:   "40px",
-                        marginRight:  "40px",
-                       }}>
-             
+           <div className={classes.marginDiv}>             
                 <Paper  style={{width: '100%',   overflowX: 'auto' }}  align="center"> 
                     <form className={classes.container} onSubmit={this.handleSubmit}>
                         <Badge  color="secondary" badgeContent={itemsAuditoriasComponentes.length} className={classes.margin}>

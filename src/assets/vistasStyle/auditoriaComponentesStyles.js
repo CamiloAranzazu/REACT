@@ -5,8 +5,11 @@ import {
   } from "../cssPadre/cssPadre";
 
 const styles = theme => ({
-
-
+  
+    marginDiv:{
+      marginLeft:   "40px",
+      marginRight:  "40px",
+    },
 
     configIconoAC: {
         height: 35,
